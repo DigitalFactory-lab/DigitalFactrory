@@ -1,0 +1,55 @@
+/* Short, once-only accents on the original composition. */
+body{overflow-x:clip}
+.year .year-number{display:inline-flex;align-items:flex-start;font:inherit;letter-spacing:inherit;line-height:1.1;color:inherit;font-variant-numeric:tabular-nums;white-space:nowrap}
+.year-number i{font:inherit;font-style:normal;color:inherit;padding:0;margin:0}
+.year-number .year-fixed{letter-spacing:inherit}
+.year-number .digit-window{display:block;width:.64em;height:1.1em;overflow:hidden;margin-left:-.075em;letter-spacing:0;position:relative}
+.year-number .digit-track{display:block;line-height:1.1;text-align:center}
+.year-number .reel-digit{display:block;height:1.1em;line-height:1.1;text-align:center}
+.transformation .transformation-start{font-size:clamp(20px,2.5vw,35px);line-height:inherit;letter-spacing:-.04em;border:1px solid #ffffff2c;border-radius:100px;padding:14px 25px;background:transparent;color:inherit;touch-action:manipulation}
+.transformation .transformation-start:focus-visible{outline:2px solid #ff986f;outline-offset:5px}
+@media(max-width:650px){.transformation .transformation-start{font-size:20px;padding:9px 15px}}
+[data-accent="focus"] em,[data-accent="walls"] em{display:inline-block;transform-origin:left 70%}
+.accent-ready[data-accent="sequence"]>span{opacity:.22;transform:translateY(15px)}
+.accent-played[data-accent="sequence"]>span{animation:word-arrival .85s cubic-bezier(.17,.75,.2,1) both;animation-delay:var(--accent-delay,0ms)}
+.accent-played[data-accent="focus"] em{animation:word-focus 1.1s cubic-bezier(.16,1,.3,1) both;animation-delay:.15s}
+.accent-played[data-accent="walls"] em{animation:walls-open 1.35s cubic-bezier(.16,1,.3,1) both;animation-delay:.15s}
+.accent-played[data-accent="number"]{animation:number-arrival 1.15s cubic-bezier(.16,1,.3,1) both;transform-origin:left center}
+.old-quote[data-accent="strike"]{display:table;position:relative;text-decoration:none}
+.old-quote[data-accent="strike"]:after{content:'';position:absolute;left:0;right:0;top:54%;height:2px;background:#ff7146;transform-origin:left center;transform:scaleX(1)}
+.old-quote.accent-ready:after{transform:scaleX(0)}
+.old-quote.accent-played:after{animation:strike-line .8s cubic-bezier(.2,.7,.2,1) both;animation-delay:.45s}
+.impact-beat{position:relative;min-height:460px;display:flex;align-items:center;justify-content:center;margin:clamp(240px,48svh,560px) -3% clamp(200px,40svh,460px);isolation:isolate}
+.impact-word{font-family:Display,Arial,sans-serif;font-size:clamp(140px,25vw,370px);font-weight:700;line-height:1.3;letter-spacing:-.09em;color:#ff7146;position:relative;margin:0;transform-origin:50% 50%;padding:0 .13em 0 0;z-index:1}
+.impact-word span{color:#f1f0e9}
+.impact-beat:before{content:'';position:absolute;width:min(70vw,600px);height:min(70vw,600px);border:1px solid #ff714650;border-radius:50%;opacity:.4;transform:scale(.92);z-index:-1}
+.impact-beat:after{content:'';position:absolute;inset:-35px -5%;background:radial-gradient(ellipse,#ff652d25,transparent 64%);opacity:.65;z-index:-1}
+.impact-beat.accent-ready .impact-word{opacity:0;transform:scale(28)}
+.impact-beat.accent-ready:before,.impact-beat.accent-ready:after{opacity:0}
+.impact-beat.accent-played .impact-word{animation:impact-arrival .72s cubic-bezier(.12,.74,.16,1) both}
+.impact-beat.accent-played:before{animation:impact-ring 1.1s cubic-bezier(.18,.65,.24,1) both;animation-delay:.58s}
+.impact-beat.accent-played:after{animation:impact-light .95s ease-out both;animation-delay:.58s}
+@keyframes word-arrival{0%{opacity:.22;transform:translateY(15px);filter:blur(2px)}48%{color:#ff9a70}100%{opacity:1;transform:none;filter:none}}
+@keyframes word-focus{0%{opacity:.2;transform:translateY(.2em) scale(.92);filter:blur(4px)}60%{text-shadow:0 0 35px #ff713a55}100%{opacity:1;transform:none;filter:none;text-shadow:none}}
+@keyframes walls-open{0%{opacity:.15;transform:translateX(-.16em);letter-spacing:-.1em}100%{opacity:1;transform:none}}
+@keyframes number-arrival{0%{opacity:.1;transform:translateY(35px) scale(.86);filter:blur(4px)}100%{opacity:1;transform:none;filter:none}}
+@keyframes strike-line{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes impact-arrival{0%{opacity:1;transform:scale(28);filter:blur(3px)}100%{opacity:1;transform:scale(1);filter:blur(0)}}
+html.impact-zoom:after{content:'';position:fixed;inset:0;z-index:100;pointer-events:none;background:#ff7146;animation:impact-orange .72s linear both}
+@keyframes impact-orange{0%,13%{opacity:1;visibility:visible}38%,100%{opacity:0;visibility:hidden}}
+html.reduced-motion.impact-zoom:after{display:none}
+@media(prefers-reduced-motion:reduce){html.impact-zoom:after{display:none}}
+
+@keyframes impact-ring{0%{opacity:0;transform:scale(.3)}25%{opacity:.65}100%{opacity:.22;transform:scale(1.22)}}
+@keyframes impact-light{0%{opacity:0;transform:scale(.5)}45%{opacity:1}100%{opacity:.65;transform:scale(1)}}
+@media(max-width:650px){.impact-beat{min-height:280px;margin:clamp(190px,42svh,380px) 0 clamp(170px,36svh,340px)}.impact-word{font-size:clamp(130px,34vw,210px)}.impact-beat:before{width:74vw;height:74vw}.impact-beat:after{inset:-10px -4%}}
+.reduced-motion [data-accent],.reduced-motion [data-accent] *,.reduced-motion [data-accent]:before,.reduced-motion [data-accent]:after{animation:none!important}
+.reduced-motion .accent-ready>span,.reduced-motion .impact-beat .impact-word{opacity:1;transform:none;filter:none}
+.reduced-motion .old-quote:after{transform:scaleX(1)}
+@media(prefers-reduced-motion:reduce){[data-accent],[data-accent] *,[data-accent]:before,[data-accent]:after{animation:none!important}.accent-ready>span,.impact-beat .impact-word{opacity:1;transform:none;filter:none}.old-quote:after{transform:scaleX(1)}}
+
+/* The oversized, invisible impact must never intercept earlier controls. */
+.impact-beat,.impact-beat *,.impact-beat:before,.impact-beat:after{pointer-events:none}
+
+.stat-number .stat-reel{display:inline-flex;align-items:flex-start;font:inherit;letter-spacing:inherit;line-height:1.1;vertical-align:top;font-variant-numeric:tabular-nums}
+.stat-reel .digit-window:first-child{margin-left:0}
